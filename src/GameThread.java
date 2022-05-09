@@ -14,10 +14,16 @@ public class GameThread extends Thread {
         int i = 0;
         while(true) {
             System.out.println(i);
-            mino.moveDown();
-            ga.reflectMinoToFiled(mino);
+            if(!mino.canMoveDown(ga)) {
+                if(mino.getY() <= 0) {
+                    break;
+                }
+                ga.fixMino(mino);
+            } else {
+                mino.moveDown();
+                ga.reflectMinoToFiled(mino);
+            }
             ga.drawField();
-            i++;
 
             try {
                 Thread.sleep(1000);
@@ -25,5 +31,10 @@ public class GameThread extends Thread {
                 Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        gameOver();
+    }
+
+    private void gameOver() {
+        System.out.println("Game Over!!");
     }
 }

@@ -40,4 +40,21 @@ public class GameArea {
         reflectFixedFieldToField();
         field[mino.getY()][mino.getX()] = 1;
     }
+
+    public boolean existsFixedBlock(int x, int y) {
+        if(x < 0 || x > FIELD_WIDTH - 1) {
+            return true;
+        }
+        if(y < 0 || y > FIELD_HEIGHT - 1) {
+            return true;
+        }
+        if(fixedField[y][x] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public void fixMino(Mino mino) {
+        fixedField[mino.getY()][mino.getX()] = 1;
+    }
 }

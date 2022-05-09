@@ -12,9 +12,14 @@ public class Mino {
         return y;
     }
 
+    public boolean canMoveDown(GameArea ga) {
+        return !ga.existsFixedBlock(x, y + 1);
+    }
+
     public void moveDown() {
         this.y++;
     }
+
     
     
 }
