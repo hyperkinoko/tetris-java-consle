@@ -3,15 +3,19 @@ import java.util.logging.Logger;
 
 public class GameThread extends Thread {
     private GameArea ga;
+    private Mino mino;
 
-    public GameThread(GameArea ga) {
+    public GameThread(GameArea ga, Mino mino) {
         this.ga = ga;
+        this.mino = mino;
     }
 
     public void run() {
         int i = 0;
         while(true) {
             System.out.println(i);
+            mino.moveDown();
+            ga.reflectMinoToFiled(mino);
             ga.drawField();
             i++;
 
