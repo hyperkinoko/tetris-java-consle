@@ -5,9 +5,7 @@ public class Mino {
     public int getX() {
         return x;
     }
-    // public void setX(int x) {
-    //     this.x = x;
-    // }
+
     public int getY() {
         return y;
     }
@@ -20,6 +18,13 @@ public class Mino {
         this.y++;
     }
 
+    public void moveRight() {
+        this.x++;
+    }
+
+    public void moveLeft() {
+        this.x--;
+    }
     
     
 }
