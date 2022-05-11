@@ -3,8 +3,8 @@ public class Mino {
 
     private int x = 4;
     private int y = 0;
-    private int angle = 0;
-    private MinoType minoType = MinoType.MINO_T;
+    private int angle = 3;
+    private MinoType minoType = MinoType.MINO_J;
 
     public int getX() {
         return x;
