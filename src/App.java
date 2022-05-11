@@ -15,7 +15,8 @@ public class App extends JFrame implements KeyListener {
     
     public static void main(String[] args) throws Exception {
         App app = new App();
-        app.setVisible(true);    }
+        app.setVisible(true);
+    }
 
     private void onDownPressed() {
         mino.moveDown();
