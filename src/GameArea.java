@@ -36,10 +36,6 @@ public class GameArea {
         } 
     }  
     
-    public void reflectMinoToFiled(Mino mino) {
-        reflectFixedFieldToField();
-        field[mino.getY()][mino.getX()] = 1;
-    }
 
     public boolean existsFixedBlock(int x, int y) {
         if(x < 0 || x > FIELD_WIDTH - 1) {
@@ -52,6 +48,23 @@ public class GameArea {
             return true;
         }
         return false;
+    }
+
+    public void reflectMinoToFiled(Mino mino) {
+        reflectFixedFieldToField();
+        for(int row = 0; row < Mino.MINO_SIZE; row++) {
+            if(mino.getY() + row < 0 || mino.getY() + row >= FIELD_HEIGHT - 1) {
+                continue;
+            }
+            for(int col = 0; col < Mino.MINO_SIZE; col++) {
+                if(mino.getX() + col < 0 || mino.getX() + col >= FIELD_WIDTH - 1) {
+                    continue;
+                }
+                if(mino.existsBlock(row, col)) {
+                    field[mino.getY() + row][mino.getX() + col] = 1;
+                }
+            }
+        }
     }
 
     public void fixMino(Mino mino) {

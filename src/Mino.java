@@ -3,8 +3,8 @@ public class Mino {
 
     private int x = 4;
     private int y = 0;
-    private int angle = 1;
-    private MinoType minoType = MinoType.MINO_T;
+    private int angle = 3;
+    private MinoType minoType = MinoType.MINO_J;
 
     public int getX() {
         return x;
@@ -28,6 +28,10 @@ public class Mino {
 
     public void moveLeft() {
         this.x--;
+    }
+
+    public boolean existsBlock(int row, int col) {
+        return this.minoType.getMinoData()[angle][row][col] == 1;
     }
     
     public static void debugPrint(int angle, MinoType minoType) {
