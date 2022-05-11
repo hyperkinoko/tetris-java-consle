@@ -5,9 +5,13 @@ public class GameThread extends Thread {
     private GameArea ga;
     private Mino mino;
 
-    public GameThread(GameArea ga, Mino mino) {
+    public GameThread(GameArea ga) {
         this.ga = ga;
-        this.mino = mino;
+        this.mino = new Mino();
+    }
+
+    public Mino getCurrentMino() {
+        return this.mino;
     }
 
     public void run() {
@@ -19,6 +23,7 @@ public class GameThread extends Thread {
                     break;
                 }
                 ga.fixMino(mino);
+                this.mino = new Mino();
             } else {
                 mino.moveDown();
                 ga.reflectMinoToFiled(mino);

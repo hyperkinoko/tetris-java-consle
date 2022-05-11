@@ -4,13 +4,13 @@ import java.awt.event.KeyListener;
 
 public class App extends JFrame implements KeyListener {
     private GameArea ga;
-    private Mino mino;
+    private GameThread thread;
 
     public App() {
         addKeyListener(this);
-        ga = new GameArea();
-        mino = new Mino();
-        new GameThread(ga, mino).start();
+        this.ga = new GameArea();
+        this.thread = new GameThread(ga);
+        this.thread.start();
     }
     
     public static void main(String[] args) throws Exception {
@@ -19,21 +19,30 @@ public class App extends JFrame implements KeyListener {
     }
 
     private void onDownPressed() {
-        mino.moveDown();
-        ga.reflectMinoToFiled(mino);
-        ga.drawField();
+        Mino mino = thread.getCurrentMino();
+        if(mino.canMoveDown(ga)) {
+            mino.moveDown();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
     }
 
     private void onRightPressed() {
-        mino.moveRight();
-        ga.reflectMinoToFiled(mino);
-        ga.drawField();
+        Mino mino = thread.getCurrentMino();
+        if(mino.canMoveRight(ga)) {
+            mino.moveRight();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
     }
     
     private void onLeftPressed() {
-        mino.moveLeft();
-        ga.reflectMinoToFiled(mino);
-        ga.drawField();
+        Mino mino = thread.getCurrentMino();
+        if(mino.canMoveLeft(ga)) {
+            mino.moveLeft();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
     }
 
     @Override
