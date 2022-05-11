@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Mino {
     public static final int MINO_SIZE = 4;
 
@@ -5,6 +7,13 @@ public class Mino {
     private int y = 0;
     private int angle = 3;
     private MinoType minoType = MinoType.MINO_J;
+
+    public Mino() {
+        this.x = 4;
+        this.y = -3;
+        this.angle = new Random().nextInt(4);
+        this.minoType = MinoType.from(new Random().nextInt(MinoType.values().length));
+    }
 
     public int getX() {
         return x;
@@ -15,7 +24,8 @@ public class Mino {
     }
 
     public boolean canMoveDown(GameArea ga) {
-        return !ga.existsFixedBlock(x, y + 1);
+        return true;
+        // return !ga.existsFixedBlock(x, y + 1);
     }
 
     public void moveDown() {
