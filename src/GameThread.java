@@ -15,7 +15,7 @@ public class GameThread extends Thread {
         while(true) {
             System.out.println(i);
             if(!mino.canMoveDown(ga)) {
-                if(mino.getY() <= 0) {
+                if(mino.getY() <= -2) {
                     break;
                 }
                 ga.fixMino(mino);

@@ -28,6 +28,11 @@ public enum MinoType {
         }
     }
 
+    public static MinoType from(int number) {
+        MinoType[] minoTypes = MinoType.values();
+        return minoTypes[number % minoTypes.length];
+    }
+
     private final int[][][] minoData_I = {
         {
             {0, 1, 0, 0},
