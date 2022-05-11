@@ -1,10 +1,21 @@
+import java.util.Random;
+
 public class Mino {
     public static final int MINO_SIZE = 4;
 
-    private int x = 4;
-    private int y = 0;
-    private int angle = 3;
-    private MinoType minoType = MinoType.MINO_J;
+    private int x;
+    private int y;
+    private int angle;
+    private MinoType minoType;
+
+    public Mino() {
+        Random r = new Random();
+        int minoTypesCount = MinoType.values().length;
+        this.x = 4;
+        this.y = -3;
+        this.angle = r.nextInt(4);
+        this.minoType = MinoType.from(r.nextInt(minoTypesCount));
+    }
 
     public int getX() {
         return x;
