@@ -36,14 +36,17 @@ public class GameArea {
         } 
     }  
     
-    public boolean existsFixedBlock(int x, int y) {
-        if(x < 0 || x > FIELD_WIDTH - 1) {
+    public boolean existsFixedBlock(int row, int col) {
+        if(col < 0 || col > FIELD_WIDTH - 1) {
             return true;
         }
-        if(y < 0 || y > FIELD_HEIGHT - 1) {
+        if(row > FIELD_HEIGHT - 1) {
             return true;
         }
-        if(fixedField[y][x] == 1) {
+        if(row < 0) {
+            return false;
+        }
+        if(fixedField[row][col] == 1) {
             return true;
         }
         return false;

@@ -24,8 +24,42 @@ public class Mino {
     }
 
     public boolean canMoveDown(GameArea ga) {
+        for(int row = 0; row < MINO_SIZE; row++) {
+            for(int col = 0; col < MINO_SIZE; col++) {
+                if(existsBlock(row, col)) {
+                    if(ga.existsFixedBlock(y + row + 1, x + col)) {
+                        return false;
+                    }
+                }
+            }
+        }
         return true;
-        // return !ga.existsFixedBlock(x, y + 1);
+    }
+
+    public boolean canMoveRight(GameArea ga) {
+        for(int row = 0; row < MINO_SIZE; row++) {
+            for(int col = 0; col < MINO_SIZE; col++) {
+                if(existsBlock(row, col)) {
+                    if(ga.existsFixedBlock(y + row, x + col + 1)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean canMoveLeft(GameArea ga) {
+        for(int row = 0; row < MINO_SIZE; row++) {
+            for(int col = 0; col < MINO_SIZE; col++) {
+                if(existsBlock(row, col)) {
+                    if(ga.existsFixedBlock(y + row, x + col - 1)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public void moveDown() {

@@ -19,21 +19,27 @@ public class App extends JFrame implements KeyListener {
     }
 
     private void onDownPressed() {
-        mino.moveDown();
-        ga.reflectMinoToFiled(mino);
-        ga.drawField();
+        if(mino.canMoveDown(ga)) {
+            mino.moveDown();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
     }
 
     private void onRightPressed() {
-        mino.moveRight();
-        ga.reflectMinoToFiled(mino);
-        ga.drawField();
+        if(mino.canMoveRight(ga)) {
+            mino.moveRight();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
     }
     
     private void onLeftPressed() {
-        mino.moveLeft();
-        ga.reflectMinoToFiled(mino);
-        ga.drawField();
+        if(mino.canMoveLeft(ga)) {
+            mino.moveLeft();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
     }
 
     @Override
