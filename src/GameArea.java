@@ -70,6 +70,18 @@ public class GameArea {
     }
 
     public void fixMino(Mino mino) {
-        fixedField[mino.getY()][mino.getX()] = 1;
+        for(int row = 0; row < Mino.MINO_SIZE; row++) {
+            if(mino.getY() + row < 0 || mino.getY() + row >= FIELD_HEIGHT - 1) {
+                continue;
+            }
+            for(int col = 0; col < Mino.MINO_SIZE; col++) {
+                if(mino.getX() + col < 0 || mino.getX() + col >= FIELD_WIDTH - 1) {
+                    continue;
+                }
+                if(mino.existsBlock(row, col)) {
+                    fixedField[mino.getY() + row][mino.getX() + col] = 1;
+                }
+            }
+        }
     }
 }
