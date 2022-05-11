@@ -30,7 +30,7 @@ public class Mino {
         this.x--;
     }
     
-    public void debugPrint(int angle, MinoType minoType) {
+    public static void debugPrint(int angle, MinoType minoType) {
         int[][][] minoData = minoType.getMinoData();
 
         for(int row = 0; row < MINO_SIZE; row++) {
