@@ -45,6 +45,15 @@ public class App extends JFrame implements KeyListener {
         }
     }
 
+    private void onUpPressed() {
+        Mino mino = thread.getCurrentMino();
+        if(mino.canRotate(ga)) {
+            mino.rotate();
+            ga.reflectMinoToFiled(mino);
+            ga.drawField();
+        }
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -52,10 +61,12 @@ public class App extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                onUpPressed();
+                break;
             case KeyEvent.VK_DOWN:
                 onDownPressed();
                 break;
-
             case KeyEvent.VK_RIGHT:
                 onRightPressed();
                 break;

@@ -3,10 +3,10 @@ import java.util.Random;
 public class Mino {
     public static final int MINO_SIZE = 4;
 
-    private int x = 4;
-    private int y = 0;
-    private int angle = 3;
-    private MinoType minoType = MinoType.MINO_J;
+    private int x;
+    private int y;
+    private int angle;
+    private MinoType minoType;
 
     public Mino() {
         this.x = 4;
@@ -62,6 +62,19 @@ public class Mino {
         return true;
     }
 
+    public boolean canRotate(GameArea ga) {
+        for(int row = 0; row < MINO_SIZE; row++) {
+            for(int col = 0; col < MINO_SIZE; col++) {
+                if(existsBlock(row, col, (this.angle + 1) % 4)) {
+                    if(ga.existsFixedBlock(y + row, x + col)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public void moveDown() {
         this.y++;
     }
@@ -74,10 +87,18 @@ public class Mino {
         this.x--;
     }
 
+    public void rotate() {
+        this.angle = (this.angle + 1) % 4;
+    }
+
     public boolean existsBlock(int row, int col) {
         return this.minoType.getMinoData()[angle][row][col] == 1;
     }
-    
+
+    public boolean existsBlock(int row, int col, int angle) {
+        return this.minoType.getMinoData()[angle][row][col] == 1;
+    }
+
     public static void debugPrint(int angle, MinoType minoType) {
         int[][][] minoData = minoType.getMinoData();
 
