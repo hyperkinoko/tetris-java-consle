@@ -36,7 +36,6 @@ public class GameArea {
         } 
     }  
     
-
     public boolean existsFixedBlock(int x, int y) {
         if(x < 0 || x > FIELD_WIDTH - 1) {
             return true;
