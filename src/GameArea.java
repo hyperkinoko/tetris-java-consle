@@ -52,7 +52,7 @@ public class GameArea {
     public void reflectMinoToFiled(Mino mino) {
         reflectFixedFieldToField();
         for(int row = 0; row < Mino.MINO_SIZE; row++) {
-            if(mino.getY() + row >= FIELD_WIDTH || mino.getY() + row < 0) {
+            if(mino.getY() + row >= FIELD_HEIGHT || mino.getY() + row < 0) {
                 continue;
             }
             for(int col = 0; col < Mino.MINO_SIZE; col++) {
@@ -68,7 +68,7 @@ public class GameArea {
 
     public void fixMino(Mino mino) {
         for(int row = 0; row < Mino.MINO_SIZE; row++) {
-            if(mino.getY() + row >= FIELD_WIDTH || mino.getY() + row < 0) {
+            if(mino.getY() + row >= FIELD_HEIGHT || mino.getY() + row < 0) {
                 continue;
             }
             for(int col = 0; col < Mino.MINO_SIZE; col++) {
