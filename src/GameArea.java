@@ -28,6 +28,8 @@ public class GameArea {
     }
 
     public void drawField() {
+        System.out.println();
+        System.out.println();
         for(int i = 0; i < field.length; i++) {
             for(int j = 0; j < field[i].length; j++) {
                 System.out.print(field[i][j] == 0 ? "・" : "回");
@@ -83,5 +85,45 @@ public class GameArea {
                 }
             }
         }
+    }
+
+    private boolean isErasable(int[] line) {
+        for(int i = 1; i < FIELD_WIDTH - 1; i++) {
+            if(line[i] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasErasableLine() {
+        for(int i = 1; i < FIELD_HEIGHT - 1; i++) {
+            if(isErasable(fixedField[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int eraseLines() {
+        //下から順に見て消せる場合は消して詰める
+        int index = FIELD_HEIGHT - 2;
+        for(int row = FIELD_HEIGHT - 2; row >= 0; row--) {
+            if(!isErasable(fixedField[row])) {
+                for(int col = 1; col < FIELD_WIDTH - 1; col++) {
+                    fixedField[index][col] = fixedField[row][col];
+                }
+                index--;
+            }
+        }
+
+        int lineCount = 0;
+        while(index >=0) {
+            fixedField[index][0] = 1;
+            fixedField[index][FIELD_WIDTH - 1] = 1;
+            index--;
+            lineCount++;
+        }
+        return lineCount;
     }
 }

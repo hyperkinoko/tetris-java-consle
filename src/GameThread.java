@@ -15,14 +15,17 @@ public class GameThread extends Thread {
     }
 
     public void run() {
-        int i = 0;
         while(true) {
-            System.out.println(i);
             if(!mino.canMoveDown(ga)) {
                 if(mino.getY() <= -2) {
                     break;
                 }
                 ga.fixMino(mino);
+                if(ga.hasErasableLine()) {
+                    // スコアを計算する場合はこの戻り値を使う
+                    // int lineCount = ga.eraseLines();
+                    ga.eraseLines();
+                }
                 this.mino = new Mino();
             } else {
                 mino.moveDown();
