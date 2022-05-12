@@ -3,8 +3,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class App extends JFrame implements KeyListener {
-    private GameArea ga;
     private GameThread thread;
+    private GameArea ga;
 
     public App() {
         addKeyListener(this);
