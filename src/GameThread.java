@@ -23,6 +23,9 @@ public class GameThread extends Thread {
                     break;
                 }
                 ga.fixMino(mino);
+                if(ga.hasErasableLine()) {
+                    int count = ga.EraseLines();
+                }
                 this.mino = new Mino();
             } else {
                 mino.moveDown();

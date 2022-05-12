@@ -84,4 +84,50 @@ public class GameArea {
             }
         }
     }
+
+    private boolean isErasable(int[] line) {
+        for(int col = 1; col < FIELD_WIDTH - 1; col++) {
+            if(line[col] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasErasableLine() {
+        for(int row = FIELD_HEIGHT - 2; row >= 0; row--) {
+            if(isErasable(fixedField[row])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int EraseLines() {
+        int index = FIELD_HEIGHT - 2;
+        for(int row = FIELD_HEIGHT - 2; row >= 0; row--) {
+           if(!isErasable(fixedField[row])) {
+                // 配列をindex番目にコピー
+                for(int col = 1; col < FIELD_WIDTH - 1; col++) {
+                    fixedField[index][col] = fixedField[row][col];
+                }
+                index--;
+           }
+        }
+
+        int lineCount = 0;
+        while(index >= 0) {
+            // 新しい配列を入れる（1行分）
+            fixedField[index][0] = 1;
+            for(int col = 1; col < FIELD_WIDTH - 1; col++) {
+                fixedField[index][col] = 0;
+            }
+            fixedField[index][FIELD_WIDTH - 1] = 1;
+            index--;
+            lineCount++;
+        } 
+        return lineCount;
+    }
+
+
 }

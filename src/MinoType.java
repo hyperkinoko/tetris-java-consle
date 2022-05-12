@@ -30,7 +30,11 @@ public enum MinoType {
 
     public static MinoType from(int number) {
         MinoType[] minoTypes = MinoType.values();
-        return minoTypes[number % minoTypes.length];
+        int index = number % minoTypes.length;
+        if(index < 0) {
+            index += minoTypes.length;
+        }
+        return minoTypes[index];
     }
 
     private final int[][][] minoData_I = {
@@ -144,27 +148,27 @@ public enum MinoType {
     private final int[][][] minoData_T = {
         {
             {0, 0, 0, 0},
+            {0, 0, 0, 0},
             {1, 1, 1, 0},
-            {0, 1, 0, 0},
             {0, 1, 0, 0},
         },           
         {
             {0, 0, 0, 0},
-            {0, 0, 1, 0},
-            {1, 1, 1, 0},
-            {0, 0, 1, 0},
+            {0, 1, 0, 0},
+            {1, 1, 0, 0},
+            {0, 1, 0, 0},
         },    
         {
             {0, 0, 0, 0},
             {0, 1, 0, 0},
-            {0, 1, 0, 0},
             {1, 1, 1, 0},
+            {0, 0, 0, 0},
         }, 
         {
             {0, 0, 0, 0},
-            {1, 0, 0, 0},
-            {1, 1, 1, 0},
-            {1, 0, 0, 0},
+            {0, 1, 0, 0},
+            {0, 1, 1, 0},
+            {0, 1, 0, 0},
         }
     };
 
