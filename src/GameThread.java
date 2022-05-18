@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 public class GameThread extends Thread {
     private GameArea ga;
     private Mino mino;
+    private int score;
+    private int waitTime = 1000;
 
     public GameThread(GameArea ga) {
         this.ga = ga;
@@ -24,7 +26,8 @@ public class GameThread extends Thread {
                 }
                 ga.fixMino(mino);
                 if(ga.hasErasableLine()) {
-                    int count = ga.EraseLines();
+                    score += ga.EraseLines();
+                    waitTime -= 10;
                 }
                 this.mino = new Mino();
             } else {
@@ -34,7 +37,7 @@ public class GameThread extends Thread {
             ga.drawField();
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(waitTime);
             } catch(InterruptedException ex) {
                 Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -44,5 +47,12 @@ public class GameThread extends Thread {
 
     private void gameOver() {
         System.out.println("Game Over!!");
+        System.out.println("あなたのスコア： " + score);
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        Score[] rankingData = APIClient.getRanking(new Score(score, "kinoko"));
+        for(Score ranking : rankingData) {
+            System.out.println(ranking);
+        }
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     }
 }
