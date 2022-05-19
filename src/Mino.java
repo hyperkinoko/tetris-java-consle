@@ -12,7 +12,8 @@ public class Mino {
         this.x = 4;
         this.y = -3;
         this.angle = new Random().nextInt(4);
-        this.minoType = MinoType.from(new Random().nextInt(MinoType.values().length));
+        this.minoType = MinoType.MINO_I;
+        //this.minoType = MinoType.from(new Random().nextInt(MinoType.values().length));
     }
 
     public int getX() {

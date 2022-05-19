@@ -27,13 +27,14 @@ public class GameArea {
         }
     }
 
-    public void drawField() {
+    public void drawField(int score) {
         for(int i = 0; i < field.length; i++) {
             for(int j = 0; j < field[i].length; j++) {
                 System.out.print(field[i][j] == 0 ? "・" : "回");
             }
             System.out.println();
         } 
+        System.out.println(String.format("SCORE: %03d", score));
     }  
     
     public boolean existsFixedBlock(int row, int col) {
