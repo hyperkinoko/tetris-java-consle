@@ -9,7 +9,7 @@ public class GameThread extends Thread {
     public GameThread(GameArea ga) {
         this.ga = ga;
         this.mino = new Mino();
-        this.score = 997;
+        this.score = 0;
     }
 
     public Mino getCurrentMino() {
