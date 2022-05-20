@@ -2,14 +2,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameThread extends Thread {
+    private final int SCORE_MAX = 999;
     private GameArea ga;
     private Mino mino;
-    private int score;
-
+    private int score = 0;
+    private int waitTime = 1000;
+    
     public GameThread(GameArea ga) {
         this.ga = ga;
         this.mino = new Mino();
-        this.score = 0;
     }
 
     public Mino getCurrentMino() {
@@ -18,10 +19,6 @@ public class GameThread extends Thread {
 
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public void run() {
@@ -35,8 +32,8 @@ public class GameThread extends Thread {
                 ga.fixMino(mino);
                 if(ga.hasErasableLine()) {
                     score += Math.pow(ga.EraseLines(), 2);
-                    if(score > 999) {
-                        score = 999;
+                    if(score > SCORE_MAX) {
+                        score = SCORE_MAX;
                     }
                 }
                 this.mino = new Mino();
@@ -45,9 +42,13 @@ public class GameThread extends Thread {
                 ga.reflectMinoToFiled(mino);
             }
             ga.drawField(score);
-
+            
+            if(waitTime > 1) {
+                waitTime--;
+            }
+            
             try {
-                Thread.sleep(1000);
+                Thread.sleep(waitTime);
             } catch(InterruptedException ex) {
                 Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
             }
