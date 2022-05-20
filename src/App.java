@@ -1,21 +1,49 @@
 import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Scanner;
 
 public class App extends JFrame implements KeyListener {
     private GameArea ga;
     private GameThread thread;
+    private GameMode gameMode = GameMode.WAITING_INPUT;
 
     public App() {
         addKeyListener(this);
         this.ga = new GameArea();
         this.thread = new GameThread(ga);
-        this.thread.start();
     }
     
     public static void main(String[] args) throws Exception {
         App app = new App();
         app.setVisible(true);
+
+        Scanner sc = new Scanner(System.in);
+        String playerName = "";
+        while(playerName == null || playerName.equals("")) {
+            System.out.print("名前を入力してください > ");
+            playerName = sc.nextLine();
+        }
+        sc.close();
+        app.setPlayerNameOfThread(playerName);
+
+        System.out.println("ゲームを始めるには左上のデュークをクリックしてからEnterキーを押してください");
+        app.setGameMode(GameMode.WAINTNG_START);
+    }
+
+    public void setGameMode(GameMode gm) {
+        this.gameMode = gm;
+    }
+
+    private void setPlayerNameOfThread(String playerName) {
+        this.thread.setPlayerName(playerName);
+    }
+
+    private void onEnterPressed() {
+        if(this.gameMode == GameMode.WAINTNG_START) {
+            this.thread.start();
+            this.gameMode = GameMode.STARTED;
+        }
     }
 
     private void onDownPressed() {
@@ -23,7 +51,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveDown(ga)) {
             mino.moveDown();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
 
@@ -32,7 +60,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveRight(ga)) {
             mino.moveRight();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
     
@@ -41,7 +69,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveLeft(ga)) {
             mino.moveLeft();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
 
@@ -50,7 +78,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canRotate(ga)) {
             mino.rotate();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
 
@@ -72,6 +100,9 @@ public class App extends JFrame implements KeyListener {
                 break;
             case KeyEvent.VK_LEFT:
                 onLeftPressed();
+                break;
+            case KeyEvent.VK_ENTER:
+                onEnterPressed();
                 break;
         }
     }
