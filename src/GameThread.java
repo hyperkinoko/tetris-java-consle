@@ -70,6 +70,23 @@ public class GameThread extends Thread {
     }
 
     private void gameOver() {
-        System.out.println("Game Over!!");
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println();
+        System.out.println("　　　　　　　Game Over!!");
+        System.out.println();
+        System.out.println(String.format("あなたのスコア: %3d", score));
+        System.out.println();
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println();
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+        System.out.println();
+        System.out.println("　　　　　　　ランキング");
+        System.out.println();
+        for(Ranking ranking: rankingList) {
+            
+        }
+        System.out.println(String.format("　　　あなたのスコア: %3d", score));
+        System.out.println();
+        System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     }
 }
