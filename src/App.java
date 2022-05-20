@@ -23,7 +23,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveDown(ga)) {
             mino.moveDown();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore());
+            ga.drawField(thread.getScore(), thread.getNextMino());
         }
     }
 
@@ -32,7 +32,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveRight(ga)) {
             mino.moveRight();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore());
+            ga.drawField(thread.getScore(), thread.getNextMino());
         }
     }
     
@@ -41,7 +41,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveLeft(ga)) {
             mino.moveLeft();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore());
+            ga.drawField(thread.getScore(), thread.getNextMino());
         }
     }
 
@@ -50,7 +50,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canRotate(ga)) {
             mino.rotate();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore());
+            ga.drawField(thread.getScore(), thread.getNextMino());
         }
     }
 

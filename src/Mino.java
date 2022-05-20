@@ -101,6 +101,17 @@ public class Mino {
         return this.minoType.getMinoData()[angle][row][col] == 1;
     }
 
+    public void drawMino() {
+        int[][][] minoData = minoType.getMinoData();
+
+        for(int row = 0; row < MINO_SIZE; row++) {
+            for(int col = 0; col < MINO_SIZE; col++) {
+                System.out.print(minoData[angle][row][col] == 1 ? "回" : "・");
+            }
+            System.out.println();
+        }
+    }
+
     public static void debugPrint(int angle, MinoType minoType) {
         int[][][] minoData = minoType.getMinoData();
 
