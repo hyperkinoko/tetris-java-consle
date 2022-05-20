@@ -6,13 +6,15 @@ public class GameThread extends Thread {
     private GameArea ga;
     private Mino mino;
     private Mino nextMino;
+    private String playerName;
     private int score = 0;
     private int waitTime = 1000;
     
-    public GameThread(GameArea ga) {
+    public GameThread(GameArea ga, String playerName) {
         this.ga = ga;
         this.mino = new Mino();
         this.nextMino = new Mino();
+        this.playerName = playerName;
     }
 
     public Mino getCurrentMino() {
@@ -21,6 +23,10 @@ public class GameThread extends Thread {
 
     public Mino getNextMino() {
         return this.nextMino;
+    }
+
+    public String getPlayerName() {
+        return this.playerName;
     }
 
     public int getScore() {
@@ -48,7 +54,7 @@ public class GameThread extends Thread {
                 mino.moveDown();
                 ga.reflectMinoToFiled(mino);
             }
-            ga.drawField(score, nextMino);
+            ga.drawField(score, nextMino, playerName);
             
             if(waitTime > 1) {
                 waitTime--;

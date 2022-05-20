@@ -1,20 +1,27 @@
 import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Scanner;
 
 public class App extends JFrame implements KeyListener {
     private GameArea ga;
     private GameThread thread;
 
-    public App() {
+    public App(String playerName) {
         addKeyListener(this);
         this.ga = new GameArea();
-        this.thread = new GameThread(ga);
+        this.thread = new GameThread(ga, playerName);
         this.thread.start();
     }
     
     public static void main(String[] args) throws Exception {
-        App app = new App();
+        Scanner sc = new Scanner(System.in);
+        String playerName = "";
+        while(playerName == null || playerName.equals("")) {
+            System.out.print("名前を入力してください > ");
+            playerName = sc.nextLine();
+        }
+        App app = new App(playerName);
         app.setVisible(true);
     }
 
@@ -23,7 +30,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveDown(ga)) {
             mino.moveDown();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
 
@@ -32,7 +39,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveRight(ga)) {
             mino.moveRight();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
     
@@ -41,7 +48,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canMoveLeft(ga)) {
             mino.moveLeft();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
 
@@ -50,7 +57,7 @@ public class App extends JFrame implements KeyListener {
         if(mino.canRotate(ga)) {
             mino.rotate();
             ga.reflectMinoToFiled(mino);
-            ga.drawField(thread.getScore(), thread.getNextMino());
+            ga.drawField(thread.getScore(), thread.getNextMino(), thread.getPlayerName());
         }
     }
 

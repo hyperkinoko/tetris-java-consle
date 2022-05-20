@@ -27,7 +27,7 @@ public class GameArea {
         }
     }
 
-    public void drawField(int score, Mino nextMino) {
+    public void drawField(int score, Mino nextMino, String name) {
         for(int i = 0; i < field.length; i++) {
             for(int j = 0; j < field[i].length; j++) {
                 System.out.print(field[i][j] == 0 ? "・" : "回");
@@ -35,8 +35,10 @@ public class GameArea {
             System.out.println();
         } 
         System.out.println();
-        System.out.println(String.format("NEXT:　　　SCORE: %03d", score));
+        System.out.println("NEXT:");
         nextMino.drawMino();
+        System.out.println();
+        System.out.println(String.format("%-10s SCORE: %03d", name, score));
     }
     
     public boolean existsFixedBlock(int row, int col) {
