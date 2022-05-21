@@ -4,8 +4,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class APIClient {
     public static Score[] getRanking(Score myScore) {
